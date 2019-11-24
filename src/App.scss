@@ -1,0 +1,200 @@
+body, html {
+    font-size: 18px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+}
+
+body {
+    background: #476a6f;
+    background-image: linear-gradient(135deg, #428171 0%, #476a6f 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+*:disabled {
+    opacity: 0.4;
+}
+
+h2 {
+    margin: 0;
+    margin-bottom: 0.5rem;
+    font-weight: normal;
+    font-size: 1.2rem;
+}
+
+section {
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 1px 15px 15px -15px rgba(0,0,0,0.3);
+    padding: 1rem;
+    border-radius: 3px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input, button {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+input {
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+button {
+    color: #333;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.5);
+    transition: 0.2s ease-in-out all;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.7);
+        box-shadow: 1px 15px 15px -15px rgba(0,0,0,0.3);
+    }
+}
+
+.form {
+    min-width: 400px;
+
+    input, button {
+        display: block;
+        width: 100%;
+    }
+}
+
+.authentication {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload {
+    &__button {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    &__queue {
+        .item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            
+            img {
+                width: 7rem;
+                border-radius: 5px;
+                box-shadow: 1px 15px 15px -15px rgba(0,0,0,0.3);
+            }
+
+            &__metadata {
+                flex: 1;
+                font-size: 0.9rem;
+                padding: 1rem;
+            }
+        }
+    }
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+
+    .photo {
+        img {
+            width: 10rem;
+            border-radius: 5px;
+            box-shadow: 1px 15px 15px -15px rgba(0,0,0,0.3);
+        }
+    }
+}
+
+.dropzone {
+    border: 2px dashed #fff;
+    padding: 1rem 5rem;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 3px;
+}
+
+@media screen and (min-width: 1000px) {
+    .photo-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* From: https://loading.io/css/
+Rewritten in SCSS by me. */
+.spinner {
+    color: white;
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+
+    div {
+        transform-origin: 40px 40px;
+        animation: spinner 1.2s linear infinite;
+
+        &:after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 3px;
+            left: 37px;
+            width: 6px;
+            height: 18px;
+            border-radius: 20%;
+            background: #fff;
+        }
+
+        @for $i from 1 through 12 {
+          &:nth-child(#{$i}) {
+            transform: rotate(#{$i * 30 - 30}deg);
+            animation-delay: #{$i * 0.1 - 1.2}s;
+          }
+        }
+    }
+}
+
+@keyframes spinner {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.spinner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: rgba(0,0,0,0.5);
+}
