@@ -6,6 +6,7 @@ import SpinnerOverlay from './components/SpinnerOverlay';
 import Gallery from './screens/Gallery';
 import * as API from './API';
 import { UserType } from './types/API';
+import Bar from './components/Bar';
 
 function App() {
     const [ loading, setLoading ] = useState(true);
@@ -53,6 +54,7 @@ function App() {
 
     return (
         <div className="app">
+            <Bar user={user} />
             { loading ? <SpinnerOverlay /> : null }
             { loggedIn ?
             <Gallery />

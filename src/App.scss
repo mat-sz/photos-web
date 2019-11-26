@@ -9,6 +9,7 @@ body {
     background-image: linear-gradient(135deg, #092327 0%, darken(#092327, 10%) 100%);
     background-repeat: no-repeat;
     background-attachment: fixed;
+    margin: 0;
 }
 
 * {
@@ -142,6 +143,18 @@ button {
 @media screen and (min-width: 1000px) {
     .photo-grid {
         grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.bar {
+    background: black;
+    margin: 0;
+    padding: 0.5rem 1rem;
+
+    &__user-info {
+        button {
+            margin-left: 1rem;
+        }
     }
 }
 
