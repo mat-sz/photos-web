@@ -181,14 +181,32 @@ async function authenticate(username: string, password: string) {
 
 /**
  * Log out.
- * @param {String} username 
- * @param {String} password 
  */
 async function deauthenticate() {
     let res = await httpDelete('auth');
 
     localStorage.removeItem('token');
     executeHandlers('deauthenticated');
+
+    return res;
+}
+
+/**
+ * Register.
+ * @param {String} username 
+ * @param {String} password 
+ */
+async function register(username: string, password: string) {
+    let res = await httpPost('auth/signup', {
+        username: username,
+        password: password,
+    });
+
+    if (!res) return null;
+
+    if (!res.hasOwnProperty('error')) {
+        await authenticate(username, password);
+    }
 
     return res;
 }
@@ -213,7 +231,7 @@ async function checkToken(value: string) {
  * @param {Function} func 
  */
 function on(eventName: string, func: Function) {
-    if (handlers.hasOwnProperty(eventName)) {
+    if (eventName in handlers) {
         handlers[eventName].push(func);
     }
 }
@@ -227,6 +245,7 @@ export {
     crudDelete,
     authenticate,
     deauthenticate,
+    register,
     checkToken,
     on,
 }
