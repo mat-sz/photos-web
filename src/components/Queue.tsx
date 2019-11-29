@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Dropzone from 'react-dropzone';
 import nailIt from 'nailit';
 
@@ -7,6 +7,8 @@ import * as Utils from '../Utils';
 
 import QueueItem from './QueueItem';
 import { QueueItemType } from '../types/Queue';
+
+const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
 function Queue({ refresh }: {
     refresh: () => void,
@@ -83,6 +85,29 @@ function Queue({ refresh }: {
         updateQueue();
     }, [files]);
 
+    // Allow pasting image data with Ctrl+V.
+    const handlePaste = useCallback((event: ClipboardEvent) => {
+        if (uploading)
+            return;
+        
+        const items = event.clipboardData.items;
+        for (let item of items) {
+            const file = item.getAsFile();
+            
+            if (file && allowedTypes.includes(file.type)) {
+                setFiles([...files, file]);
+            }
+        }
+    }, [files, uploading]);
+
+    useEffect(() => {
+        document.addEventListener('paste', handlePaste);
+
+        return () => {
+            document.removeEventListener('paste', handlePaste);
+        };
+    }, [handlePaste]);
+
     return (
         <section className="upload">
             <h2>Upload</h2>
@@ -105,7 +130,7 @@ function Queue({ refresh }: {
             <Dropzone onDrop={acceptedFiles => setFiles([...files, ...acceptedFiles])}>
                 {({ getRootProps, getInputProps }) => (
                 <div {...getRootProps()} className="dropzone">
-                    <input {...getInputProps()} accept="image/jpeg, image/png, image/gif" />
+                    <input {...getInputProps()} accept={allowedTypes.join(',')} />
                     <div>Drag and drop image files here</div>
                     <div>or click on this area to open a file selection dialog.</div>
                 </div>
