@@ -109,8 +109,7 @@ function Queue({ refresh }: {
     }, [handlePaste]);
 
     return (
-        <section className="upload">
-            <h2>Upload</h2>
+        <div className="upload">
             { uploadQueue.length > 0 ?
             <div className="upload__queue">
                 {uploadQueue.map((item, i) =>
@@ -131,13 +130,13 @@ function Queue({ refresh }: {
                 {({ getRootProps, getInputProps }) => (
                 <div {...getRootProps()} className="dropzone">
                     <input {...getInputProps()} accept={allowedTypes.join(',')} />
-                    <div>Drag and drop image files here</div>
+                    <div>To upload photos, drag and drop image files here</div>
                     <div>or click on this area to open a file selection dialog.</div>
                 </div>
                 )}
             </Dropzone>
             }
-        </section>
+        </div>
     );
 }
 

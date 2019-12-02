@@ -89,6 +89,7 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 2rem;
 }
 
 .upload {
@@ -152,11 +153,12 @@ button {
 }
 
 .dropzone {
-    border: 2px dashed #fff;
+    background: rgba(255, 255, 255, 0.1);
     padding: 1rem 5rem;
     cursor: pointer;
     text-align: center;
     border-radius: 3px;
+    margin-bottom: 2rem;
 }
 
 @media screen and (min-width: 1000px) {
@@ -166,9 +168,11 @@ button {
 }
 
 .bar {
-    background: black;
+    background: rgba(0, 0, 0, 0.3);
     margin: 0;
     padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: flex-end;
 
     &__user-info {
         button {

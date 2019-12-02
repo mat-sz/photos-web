@@ -25,9 +25,11 @@ function Gallery() {
     
     return (
         <div className="gallery">
-            <h1>Your gallery</h1>
-            <Queue refresh={() => updatePhotos()} />
-            <Photos loading={loading} photos={photos} />
+            <section>
+                <h2>Your gallery</h2>
+                <Queue refresh={() => updatePhotos()} />
+                <Photos loading={loading} photos={photos} />
+            </section>
         </div>
     );
 }
