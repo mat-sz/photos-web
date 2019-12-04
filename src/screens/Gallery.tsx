@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import Queue from '../components/Queue';
 import Photos from '../components/Photos';
@@ -8,7 +8,7 @@ function Gallery() {
     const [ loading, setLoading ] = useState(true);
     const [ photos, setPhotos ] = useState([]);
 
-    const updatePhotos = async () => {
+    const updatePhotos = useCallback(async () => {
         setLoading(true);
         
         const json = await crudIndex('photos');
@@ -17,11 +17,11 @@ function Gallery() {
         }
 
         setLoading(false);
-    };
+    }, [setPhotos]);
 
     useEffect(() => {
         updatePhotos();
-    }, []);
+    }, [updatePhotos]);
     
     return (
         <div className="gallery">
