@@ -3,10 +3,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Queue from '../components/Queue';
 import Photos from '../components/Photos';
 import { crudIndex } from '../API';
+import { PhotoType } from '../types/API';
 
 function Gallery() {
     const [ loading, setLoading ] = useState(true);
-    const [ photos, setPhotos ] = useState([]);
+    const [ photos, setPhotos ] = useState<PhotoType[]>([]);
 
     const updatePhotos = useCallback(async () => {
         setLoading(true);
