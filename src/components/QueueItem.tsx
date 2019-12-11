@@ -18,7 +18,7 @@ function QueueItem({ item, uploading, onRemove }: {
                 { uploading ? (
                     item.uploading ? "Uploading..." : "Queued"
                 ) :
-                <button onClick={() => onRemove()}>Remove</button>
+                <button onClick={onRemove}>Remove</button>
                 }
             </div>
         </div>

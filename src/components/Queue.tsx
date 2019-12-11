@@ -85,6 +85,8 @@ function Queue({ refresh }: {
         updateQueue(files);
     }, [files, updateQueue]);
 
+    const onDrop = (acceptedFiles: File[]) => setFiles([...files, ...acceptedFiles]);
+
     // Allow pasting image data with Ctrl+V.
     const handlePaste = useCallback((event: ClipboardEvent) => {
         if (uploading)
@@ -112,21 +114,25 @@ function Queue({ refresh }: {
         <div className="upload">
             { uploadQueue.length > 0 ?
             <div className="upload__queue">
-                {uploadQueue.map((item, i) =>
-                    <QueueItem item={item} key={i} uploading={uploading} onRemove={() => {
+                {uploadQueue.map((item, i) => {
+                    const onRemove = () => {
                         files.splice(i, 1);
                         setFiles([...files]);
-                    }} />
-                )}
+                    };
+
+                    return (
+                        <QueueItem item={item} key={i} uploading={uploading} onRemove={onRemove} />
+                    );
+                })}
                 <button
                     className="upload__button"
                     disabled={uploading}
-                    onClick={() => startUploading()}>
+                    onClick={startUploading}>
                         Begin uploading</button>
             </div>
             : null }
             { uploading ? null :
-            <Dropzone onDrop={acceptedFiles => setFiles([...files, ...acceptedFiles])}>
+            <Dropzone onDrop={onDrop}>
                 {({ getRootProps, getInputProps }) => (
                 <div {...getRootProps()} className="dropzone">
                     <input {...getInputProps()} accept={allowedTypes.join(',')} />

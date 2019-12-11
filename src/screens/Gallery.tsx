@@ -28,7 +28,7 @@ function Gallery() {
         <div className="gallery">
             <section>
                 <h2>Your gallery</h2>
-                <Queue refresh={() => updatePhotos()} />
+                <Queue refresh={updatePhotos} />
                 <Photos loading={loading} photos={photos} />
             </section>
         </div>

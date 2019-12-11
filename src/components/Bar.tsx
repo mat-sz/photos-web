@@ -9,7 +9,7 @@ function Bar({ user }: { user: UserType }) {
             { user ?
             <div className="bar__user-info">
                 <span>{user.username}</span>
-                <button onClick={() => deauthenticate()}>Log out</button>
+                <button onClick={deauthenticate}>Log out</button>
             </div> :
             <div>Not logged in.</div> }
         </nav>
