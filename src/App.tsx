@@ -7,35 +7,33 @@ import Gallery from './screens/Gallery';
 import * as API from './API';
 import { UserType, InstanceType } from './types/API';
 import Bar from './components/Bar';
+import { useDispatch, useSelector } from 'react-redux';
+import { ActionType } from './types/ActionType';
+import { StateType } from './reducers';
 
 function App() {
+    const dispatch = useDispatch();
     const [ loading, setLoading ] = useState(true);
-    const [ loggedIn, setLoggedIn ] = useState(false);
-    const [ user, setUser ] = useState(null);
-    const [ error, setError ] = useState(null);
-    const [ title, setTitle ] = useState('photos-web');
+    const loggedIn = useSelector((state: StateType) => state.authenticationState.loggedIn);
+    const user = useSelector((state: StateType) => state.authenticationState.user);
 
     // Behaves like the good old "componentDidMount" when the second argument is an empty array.
     useEffect(() => {
         // API events.
         API.on('authenticated', (user: UserType) => {
-            setLoading(false);
-            setUser(user);
-            setLoggedIn(true);
+            dispatch({ type: ActionType.AUTHENTICATED, value: user });
         });
     
         API.on('deauthenticated', () => {
-            setLoading(false);
-            setLoggedIn(false);
-            setUser(null);
+            dispatch({ type: ActionType.DEAUTHENTICATED });
         });
     
         API.on('error', (e: string) => {
-            setError(e);
+            dispatch({ type: ActionType.SET_ERROR, value: e });
         });
 
         API.crudIndex('instance').then((instance: InstanceType) => {
-            setTitle(instance.title);
+            dispatch({ type: ActionType.SET_TITLE, value: instance.title });
         });
 
         // Check if there's a saved token in our local storage.
@@ -43,11 +41,9 @@ function App() {
         if (localStorage.getItem('token')) {
             API.checkToken(localStorage.getItem('token')).then((json) => {
                 if (json) {
-                    setUser(json);
-                    setLoggedIn(true);
+                    dispatch({ type: ActionType.AUTHENTICATED, value: json });
                 } else {
-                    setUser(null);
-                    setLoggedIn(false);
+                    dispatch({ type: ActionType.DEAUTHENTICATED });
                 }
 
                 setLoading(false);
@@ -57,17 +53,15 @@ function App() {
         }
     }, []);
 
-    useEffect(() => {
-        document.title = title;
-    }, [title]);
-
     return (
         <div className="app">
             <Bar user={user} />
             { loading ? <SpinnerOverlay /> : null }
             { loggedIn ?
-            <Gallery />
-            : <Authentication error={error} />}
+                <Gallery />
+            :
+                <Authentication />
+            }
         </div>
     );
 }

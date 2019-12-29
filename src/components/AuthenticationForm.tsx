@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 
 import { authenticate, register } from '../API';
 
-function AuthenticationForm({ error, signup = false }: {
-    error: string,
+function AuthenticationForm({ signup = false }: {
     signup?: boolean,
 }) {
     const [ username, setUsername ] = useState(null);
@@ -24,9 +23,6 @@ function AuthenticationForm({ error, signup = false }: {
 
     return (
         <section className="form">
-            { error ?
-            <div className="form__error">{error}</div>
-            : null }
             <label>
                 <input
                     placeholder="Username"
