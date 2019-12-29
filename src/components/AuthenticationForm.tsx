@@ -27,7 +27,7 @@ function AuthenticationForm({ signup = false }: {
                 password: password,
             }});
         }
-    }, [ username, password ]);
+    }, [ username, password, dispatch, signup ]);
 
     return (
         <section className="form">
