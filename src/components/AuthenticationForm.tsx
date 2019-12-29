@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { authenticate, register } from '../API';
+import { ActionType } from '../types/ActionType';
 
 function AuthenticationForm({ signup = false }: {
     signup?: boolean,
 }) {
+    const dispatch = useDispatch();
     const [ username, setUsername ] = useState(null);
     const [ password, setPassword ] = useState(null);
     const [ passwordConfirmation, setPasswordConfirmation ] = useState(null);
@@ -13,13 +15,19 @@ function AuthenticationForm({ signup = false }: {
     const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
     const onChangePasswordConfirmation = (e: React.ChangeEvent<HTMLInputElement>) => setPasswordConfirmation(e.target.value);
 
-    const action = () => {
+    const action = useCallback(() => {
         if (signup) {
-            register(username, password);
+            dispatch({ type: ActionType.SIGNUP, value: {
+                username: username,
+                password: password,
+            }});
         } else {
-            authenticate(username, password);
+            dispatch({ type: ActionType.AUTHENTICATE, value: {
+                username: username,
+                password: password,
+            }});
         }
-    }
+    }, [ username, password ]);
 
     return (
         <section className="form">

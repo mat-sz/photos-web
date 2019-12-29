@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Dropzone from 'react-dropzone';
 import nailIt from 'nailit';
 
-import * as API from '../API';
 import * as Utils from '../Utils';
 
 import QueueItem from './QueueItem';
@@ -26,18 +25,19 @@ function Queue({ refresh }: {
             item.error = false;
             setUploadQueue([...uploadQueue]);
 
-            const photo = await API.crudUpload('photos', {
-                thumbnail: item.thumbnailBlob,
-                full: item.blob,
-                private: false,
-                title: item.name,
-            });
+            // TODO
+            // const photo = await API.crudUpload('photos', {
+            //     thumbnail: item.thumbnailBlob,
+            //     full: item.blob,
+            //     private: false,
+            //     title: item.name,
+            // });
 
-            if (photo && !photo.error) {
-                item.photo = photo;
-            } else {
-                item.error = true;
-            }
+            // if (photo && !photo.error) {
+            //     item.photo = photo;
+            // } else {
+            //     item.error = true;
+            // }
 
             item.uploading = false;
 

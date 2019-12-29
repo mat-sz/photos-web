@@ -8,4 +8,4 @@ React (& TypeScript) front-end for [photos-api](https://github.com/mat-sz/photos
 
 First, follow the instructions in the project mentioned above.
 
-Then, copy ./src/Config.example.ts to ./src/Config.ts, edit as neccessary and run yarn install and then yarn build.
+**Make sure to set the `REACT_APP_API_URL` environment variable when deploying to production. Trailing slash is required.**

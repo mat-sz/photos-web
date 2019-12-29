@@ -43,6 +43,11 @@ section {
     align-items: center;
 }
 
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
 input, button {
     background: rgba(255, 255, 255, 0.1);
     border: none;
@@ -233,4 +238,5 @@ Rewritten in SCSS by me. */
     bottom: 0;
 
     background: rgba(0,0,0,0.5);
+    z-index: 9999;
 }

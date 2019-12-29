@@ -1,4 +1,4 @@
-import { PhotoType } from "./API";
+import { PhotoEntity } from "./Entities";
 
 export interface QueueItemType {
     name?: string,
@@ -10,5 +10,5 @@ export interface QueueItemType {
     thumbnailBlob: Blob,
     uploading: boolean,
     error: boolean,
-    photo?: PhotoType,
+    photo?: PhotoEntity,
 };

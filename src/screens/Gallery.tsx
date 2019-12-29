@@ -1,35 +1,29 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Queue from '../components/Queue';
 import Photos from '../components/Photos';
-import { crudIndex } from '../API';
-import { PhotoType } from '../types/API';
+import { StateType } from '../reducers';
+import { ActionType } from '../types/ActionType';
 
 function Gallery() {
-    const [ loading, setLoading ] = useState(true);
-    const [ photos, setPhotos ] = useState<PhotoType[]>([]);
+    const dispatch = useDispatch();
+    const photos = useSelector((state: StateType) => state.photoState.photos);
 
     const updatePhotos = useCallback(async () => {
-        setLoading(true);
-        
-        const json = await crudIndex('photos');
-        if (json && !json.error && Array.isArray(json)) {
-            setPhotos(json);
-        }
-
-        setLoading(false);
-    }, [setPhotos]);
+        dispatch({ type: ActionType.FETCH_PHOTOS });
+    }, [ dispatch ]);
 
     useEffect(() => {
         updatePhotos();
-    }, [updatePhotos]);
+    }, [ updatePhotos ]);
     
     return (
         <div className="gallery">
             <section>
                 <h2>Your gallery</h2>
                 <Queue refresh={updatePhotos} />
-                <Photos loading={loading} photos={photos} />
+                <Photos photos={photos} />
             </section>
         </div>
     );

@@ -14,6 +14,10 @@ export enum ActionType {
     DEAUTHENTICATE = 'DEAUTHENTICATE',
     SIGNUP = 'SIGNUP',
 
+    // Photos
+    FETCH_PHOTOS = 'FETCH_PHOTOS',
+    SET_PHOTOS = 'SET_PHOTOS',
+
     // Settings
     SET_TOKEN = 'SET_TOKEN',
 };

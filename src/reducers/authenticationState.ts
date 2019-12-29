@@ -1,10 +1,10 @@
 import { ActionModel } from '../types/Models';
 import { ActionType } from '../types/ActionType';
-import { UserType } from '../types/API';
+import { UserEntity } from '../types/Entities';
 
 export interface AuthenticationState {
     loggedIn: boolean,
-    user: UserType,
+    user: UserEntity,
 };
 
 let initialState: AuthenticationState = {
@@ -17,7 +17,7 @@ export default function authenticationState(state = initialState, action: Action
     switch (action.type) {
         case ActionType.AUTHENTICATED:
             newState.loggedIn = true;
-            newState.user = action.value as UserType;
+            newState.user = action.value as UserEntity;
             break;
         case ActionType.DEAUTHENTICATED:
             newState.loggedIn = false;

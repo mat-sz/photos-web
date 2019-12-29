@@ -1,9 +1,15 @@
-import React from 'react';
-import { UserType } from '../types/API';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { deauthenticate } from '../API';
+import { ActionType } from '../types/ActionType';
+import { UserEntity } from '../types/Entities';
 
-function Bar({ user }: { user: UserType }) {
+function Bar({ user }: { user: UserEntity }) {
+    const dispatch = useDispatch();
+    const deauthenticate = useCallback(() => {
+        dispatch({ type: ActionType.DEAUTHENTICATE });
+    }, [ dispatch ]);
+
     return (
         <nav className="bar">
             { user ?

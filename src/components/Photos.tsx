@@ -1,16 +1,13 @@
 import React from 'react';
 
-import SpinnerOverlay from './SpinnerOverlay';
 import Photo from './Photo';
-import { PhotoType } from '../types/API';
+import { PhotoEntity } from '../types/Entities';
 
-function Photos({ loading, photos }: {
-    loading: boolean,
-    photos: PhotoType[]
+function Photos({ photos }: {
+    photos: PhotoEntity[]
 }) {
     return (
         <div className="photos">
-            { loading ? <SpinnerOverlay /> : null }
             <div className="photo-grid">
                 { photos.length === 0 ?
                 "You don't have any photos." :

@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Config from '../Config';
-import { PhotoType } from '../types/API';
+import { url } from '../sagas/http';
+import { PhotoEntity } from '../types/Entities';
 
 function Photo({ photo }: {
-    photo: PhotoType
+    photo: PhotoEntity
 }) {
-    const getURL = (type: string) => Config.url + "photos/" + photo.id + "/file/" + type + (photo.private ? "?key=" + photo.key : "");
+    const getURL = (type: string) => url + "photos/" + photo.id + "/file/" + type + (photo.private ? "?key=" + photo.key : "");
 
     return (
         <a className="photo" href={getURL("full")} target="_blank" rel="noopener noreferrer">

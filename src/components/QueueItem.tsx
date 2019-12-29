@@ -1,5 +1,6 @@
 import React from 'react';
 import filesize from 'filesize';
+
 import { QueueItemType } from '../types/Queue';
 
 function QueueItem({ item, uploading, onRemove }: {
