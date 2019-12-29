@@ -220,6 +220,22 @@ Rewritten in SCSS by me. */
     }
 }
 
+.error {
+    text-align: center;
+    background: rgba(0,0,0,0.75);
+    padding: 1rem;
+    border-radius: 5px;
+
+    div {
+        padding: 0.5rem;
+        display: flex;
+
+        button {
+            flex: 1;
+        }
+    }
+}
+
 @keyframes spinner {
     0% {
         opacity: 1;

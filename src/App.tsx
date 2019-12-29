@@ -2,6 +2,7 @@ import React from 'react';
 
 import './App.scss';
 import Authentication from './screens/Authentication';
+import ErrorOverlay from './components/ErrorOverlay';
 import SpinnerOverlay from './components/SpinnerOverlay';
 import Gallery from './screens/Gallery';
 import Bar from './components/Bar';
@@ -15,6 +16,7 @@ function App() {
     return (
         <div className="app">
             <Bar user={user} />
+            <ErrorOverlay />
             <SpinnerOverlay />
             { loggedIn ?
                 <Gallery />
