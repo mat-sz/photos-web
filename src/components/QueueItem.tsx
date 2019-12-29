@@ -3,9 +3,8 @@ import filesize from 'filesize';
 
 import { QueueItemType } from '../types/Queue';
 
-function QueueItem({ item, uploading, onRemove }: {
+function QueueItem({ item, onRemove }: {
     item: QueueItemType,
-    uploading: boolean,
     onRemove: () => void,
 }) {
     return (
@@ -16,11 +15,7 @@ function QueueItem({ item, uploading, onRemove }: {
                 <div>{ filesize(item.size) }</div>
             </div>
             <div className="item__actions">
-                { uploading ? (
-                    item.uploading ? "Uploading..." : "Queued"
-                ) :
                 <button onClick={onRemove}>Remove</button>
-                }
             </div>
         </div>
     );

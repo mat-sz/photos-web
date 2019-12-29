@@ -1,6 +1,7 @@
 import { PhotoEntity } from "./Entities";
 
 export interface QueueItemType {
+    id: string,
     name?: string,
     displayName?: string,
     size: number,
@@ -8,7 +9,4 @@ export interface QueueItemType {
     blob: Blob,
     thumbnailDataURL: string,
     thumbnailBlob: Blob,
-    uploading: boolean,
-    error: boolean,
-    photo?: PhotoEntity,
 };

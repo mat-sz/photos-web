@@ -19,14 +19,19 @@ function* http(method: string, action: string, body?: FormData|string) {
     yield put({ type: ActionType.SET_LOADING, value: true });
     const token = yield select((state: StateType) => state.settings.token);
 
+    let headers: any = {
+        'Authorization': token,
+        'Accept': 'application/json',
+    };
+
+    if (typeof body === 'string') {
+        headers['Content-Type'] = 'application/json';
+    }
+
     let res = yield call(() => fetch(url + action, {
         body: body,
         method: method,
-        headers: {
-            'Authorization': token,
-            'Content-Type': typeof body === 'string' ? 'application/json' : null,
-            'Accept': 'application/json',
-        }
+        headers: headers,
     }));
 
     activeRequests--;
@@ -53,6 +58,20 @@ export function* httpGet(action: string) {
 
 export function* httpPost(action: string, data: any) {
     return yield call(() => http('POST', action, JSON.stringify(data)));
+}
+
+export function* httpUpload(action: string, data: any) {
+    let formData = new FormData();
+    
+    if (data) {
+        for (let row of Object.keys(data)) {
+            if (row === 'key') continue;
+            if (typeof data[row] === 'undefined' || data[row] === null) continue;
+            formData.append(row, data[row]);
+        }
+    }
+
+    return yield call(() => http('POST', action, formData));
 }
 
 export function* httpDelete(action: string) {

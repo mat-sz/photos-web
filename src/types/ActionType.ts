@@ -17,6 +17,8 @@ export enum ActionType {
     // Photos
     FETCH_PHOTOS = 'FETCH_PHOTOS',
     SET_PHOTOS = 'SET_PHOTOS',
+    QUEUE_ADD = 'QUEUE_ADD',
+    QUEUE_REMOVE = 'QUEUE_REMOVE',
 
     // Settings
     SET_TOKEN = 'SET_TOKEN',

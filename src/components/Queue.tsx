@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Dropzone from 'react-dropzone';
 import nailIt from 'nailit';
+import uuid from 'uuid/v4';
 
 import * as Utils from '../Utils';
 
 import QueueItem from './QueueItem';
 import { QueueItemType } from '../types/Queue';
+import { useDispatch } from 'react-redux';
+import { ActionType } from '../types/ActionType';
 
 const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
@@ -14,42 +17,15 @@ function Queue({ refresh }: {
 }) {
     const [ files, setFiles ] = useState<File[]>([]);
     const [ uploadQueue, setUploadQueue ] = useState<QueueItemType[]>([]);
-    const [ uploading, setUploading ] = useState(false);
+    const dispatch = useDispatch();
 
     const startUploading = async () => {
-        if (uploading) return;
-        setUploading(true);
-
         for (let item of uploadQueue) {
-            item.uploading = true;
-            item.error = false;
-            setUploadQueue([...uploadQueue]);
-
-            // TODO
-            // const photo = await API.crudUpload('photos', {
-            //     thumbnail: item.thumbnailBlob,
-            //     full: item.blob,
-            //     private: false,
-            //     title: item.name,
-            // });
-
-            // if (photo && !photo.error) {
-            //     item.photo = photo;
-            // } else {
-            //     item.error = true;
-            // }
-
-            item.uploading = false;
-
-            setUploadQueue([...uploadQueue]);
+            dispatch({ type: ActionType.QUEUE_ADD, value: item });
         }
 
         setFiles([]);
         setUploadQueue([]);
-        setUploading(false);
-
-        // Updates our photo list in the gallery.
-        refresh();
     };
 
     const updateQueue = useCallback(async (files) => {
@@ -64,6 +40,7 @@ function Queue({ refresh }: {
             const thumbnailDataURL = await nailIt(dataURL, 300, true);
 
             let queueItem: QueueItemType = {
+                id: uuid(),
                 name: item.name,
                 size: item.size,
                 displayName: filenameSplit.join('.'),
@@ -71,27 +48,22 @@ function Queue({ refresh }: {
                 blob: await Utils.dataURLToBlob(dataURL),
                 thumbnailDataURL: thumbnailDataURL,
                 thumbnailBlob: await Utils.dataURLToBlob(thumbnailDataURL),
-                uploading: false,
-                error: false,
             };
 
             newQueue.push(queueItem);
         }
 
         setUploadQueue(newQueue);
-    }, [setUploadQueue]);
+    }, [ setUploadQueue ]);
 
     useEffect(() => {
         updateQueue(files);
-    }, [files, updateQueue]);
+    }, [ files, updateQueue ]);
 
     const onDrop = (acceptedFiles: File[]) => setFiles([...files, ...acceptedFiles]);
 
     // Allow pasting image data with Ctrl+V.
     const handlePaste = useCallback((event: ClipboardEvent) => {
-        if (uploading)
-            return;
-        
         const items = event.clipboardData.items;
         for (let item of items) {
             const file = item.getAsFile();
@@ -100,7 +72,7 @@ function Queue({ refresh }: {
                 setFiles([...files, file]);
             }
         }
-    }, [files, uploading]);
+    }, [ files ]);
 
     useEffect(() => {
         document.addEventListener('paste', handlePaste);
@@ -108,7 +80,7 @@ function Queue({ refresh }: {
         return () => {
             document.removeEventListener('paste', handlePaste);
         };
-    }, [handlePaste]);
+    }, [ handlePaste ]);
 
     return (
         <div className="upload">
@@ -121,17 +93,15 @@ function Queue({ refresh }: {
                     };
 
                     return (
-                        <QueueItem item={item} key={i} uploading={uploading} onRemove={onRemove} />
+                        <QueueItem item={item} key={i} onRemove={onRemove} />
                     );
                 })}
                 <button
                     className="upload__button"
-                    disabled={uploading}
                     onClick={startUploading}>
                         Begin uploading</button>
             </div>
             : null }
-            { uploading ? null :
             <Dropzone onDrop={onDrop}>
                 {({ getRootProps, getInputProps }) => (
                 <div {...getRootProps()} className="dropzone">
@@ -141,7 +111,6 @@ function Queue({ refresh }: {
                 </div>
                 )}
             </Dropzone>
-            }
         </div>
     );
 }
