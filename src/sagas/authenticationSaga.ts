@@ -2,17 +2,17 @@ import { put, takeEvery, call, select } from 'redux-saga/effects';
 
 import { httpGet, httpPost, httpDelete } from './http';
 import { ActionType } from '../types/ActionType';
-import { ActionModel } from '../types/Models';
+import { ActionModel, ResponseModel } from '../types/Models';
 import { StateType } from '../reducers';
 
 function* authenticate(action: ActionModel) {
-    let res = yield call(() => httpPost('auth', action.value));
+    let res: ResponseModel = yield call(() => httpPost('auth', action.value));
 
     if (!res.success) return;
 
-    yield put({ type: ActionType.SET_TOKEN, value: res.token });
+    yield put({ type: ActionType.SET_TOKEN, value: res.data });
 
-    let authRes = yield call(() => httpGet('auth'));
+    let authRes: ResponseModel = yield call(() => httpGet('auth'));
     yield put({ type: ActionType.AUTHENTICATED, value: authRes.data });
 }
 
@@ -21,19 +21,19 @@ function *checkToken() {
 
     if (!token) return;
 
-    const res = yield call(() => httpGet('auth'));
+    const res: ResponseModel = yield call(() => httpGet('auth'));
 
-    if (res) {
-        yield put({ type: ActionType.AUTHENTICATED, value: res });
+    if (res.success) {
+        yield put({ type: ActionType.AUTHENTICATED, value: res.data });
     } else {
         yield put({ type: ActionType.SET_TOKEN, value: null });
     }
 }
 
 function* signup(action: ActionModel) {
-    let res = yield call(() => httpPost('auth/signup', action.value));
+    let res: ResponseModel = yield call(() => httpPost('auth/signup', action.value));
 
-    if (!res) return;
+    if (!res.success) return;
 
     yield call(() => authenticate(action));
 }

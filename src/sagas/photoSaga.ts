@@ -2,12 +2,13 @@ import { put, takeEvery, call } from 'redux-saga/effects';
 
 import { httpGet } from './http';
 import { ActionType } from '../types/ActionType';
+import { ResponseModel } from '../types/Models';
 
 function* fetchPhotos() {
-    let res = yield call(() => httpGet('photos'));
+    let res: ResponseModel = yield call(() => httpGet('photos'));
 
-    if (res) {
-        yield put({ type: ActionType.SET_PHOTOS, value: res });
+    if (res.success) {
+        yield put({ type: ActionType.SET_PHOTOS, value: res.data });
     }
 }
 

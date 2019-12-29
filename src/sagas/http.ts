@@ -40,8 +40,8 @@ function* http(method: string, action: string, body?: FormData|string) {
 
     let json = (yield call(() => tryJson(res)));
 
-    if (json && json.message) {
-        yield put({ type: ActionType.SET_ERROR, value: json.message });
+    if (json && json.error) {
+        yield put({ type: ActionType.SET_ERROR, value: json.error.message });
     }
 
     return json;

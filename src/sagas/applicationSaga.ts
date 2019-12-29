@@ -1,7 +1,7 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 
 import { ActionType } from '../types/ActionType';
-import { ActionModel } from '../types/Models';
+import { ActionModel, ResponseModel } from '../types/Models';
 import { httpGet } from './http';
 
 function* setTitle(action: ActionModel) {
@@ -9,10 +9,10 @@ function* setTitle(action: ActionModel) {
 }
 
 function* updateInstanceInfo() {
-    let res = yield call(() => httpGet('instance'));
+    let res: ResponseModel = yield call(() => httpGet('instance'));
 
-    if (res.title) {
-        yield put({ type: ActionType.SET_TITLE, value: res.title });
+    if (res.data && res.data.title) {
+        yield put({ type: ActionType.SET_TITLE, value: res.data.title });
     }
 }
 
