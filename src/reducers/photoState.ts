@@ -31,7 +31,5 @@ export default function photoState(state = initialState, action: ActionModel) {
             return state;
     }
 
-    console.log(newState.uploadQueue);
-
     return newState;
 };

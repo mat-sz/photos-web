@@ -177,7 +177,12 @@ button {
     margin: 0;
     padding: 0.5rem 1rem;
     display: flex;
+    align-items: center;
     justify-content: flex-end;
+
+    &__queue-info {
+        flex: 1;
+    }
 
     &__user-info {
         button {

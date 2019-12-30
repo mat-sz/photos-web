@@ -11,11 +11,10 @@ import { StateType } from './reducers';
 
 function App() {
     const loggedIn = useSelector((state: StateType) => state.authenticationState.loggedIn);
-    const user = useSelector((state: StateType) => state.authenticationState.user);
 
     return (
         <div className="app">
-            <Bar user={user} />
+            <Bar />
             <ErrorOverlay />
             <SpinnerOverlay />
             { loggedIn ?
