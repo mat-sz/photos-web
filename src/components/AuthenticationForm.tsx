@@ -1,10 +1,10 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { ActionType } from '../types/ActionType';
 
-function AuthenticationForm({ signup = false }: {
-    signup?: boolean,
+function AuthenticationForm({ isSignup = false }: {
+    isSignup?: boolean,
 }) {
     const dispatch = useDispatch();
     const [ username, setUsername ] = useState(null);
@@ -15,47 +15,57 @@ function AuthenticationForm({ signup = false }: {
     const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
     const onChangePasswordConfirmation = (e: React.ChangeEvent<HTMLInputElement>) => setPasswordConfirmation(e.target.value);
 
-    const action = useCallback(() => {
-        if (signup) {
-            dispatch({ type: ActionType.SIGNUP, value: {
-                username: username,
-                password: password,
-            }});
-        } else {
-            dispatch({ type: ActionType.AUTHENTICATE, value: {
-                username: username,
-                password: password,
-            }});
+    const formDisabled = useMemo(() =>
+        !username || !password || (isSignup && password !== passwordConfirmation),
+        [ username, password, isSignup, passwordConfirmation ]
+    );
+
+    const action = useCallback((e: FormEvent) => {
+        e.preventDefault();
+
+        if (formDisabled) {
+            return;
         }
-    }, [ username, password, dispatch, signup ]);
+        
+        const model = {
+            username: username,
+            password: password
+        };
+
+        dispatch({ type: isSignup ? ActionType.SIGNUP : ActionType.AUTHENTICATE, value: model });
+    }, [ username, password, dispatch, isSignup, formDisabled ]);
 
     return (
         <section className="form">
-            <label>
-                <input
-                    placeholder="Username"
-                    onChange={onChangeUsername} />
-            </label>
-            <label>
-                <input
-                    placeholder="Password"
-                    type="password"
-                    onChange={onChangePassword} />
-            </label>
-            { signup ?
+            <form
+                onSubmit={action}>
                 <label>
                     <input
-                        placeholder="Confirm password"
-                        type="password"
-                        onChange={onChangePasswordConfirmation} />
+                        placeholder="Username"
+                        onChange={onChangeUsername} />
                 </label>
-            : null }
-            <div className="form__buttons">
-                <button onClick={action}
-                    disabled={!username || !password || (signup && password !== passwordConfirmation)}>
-                    { signup ? 'Sign up' : 'Sign in' }
-                </button>
-            </div>
+                <label>
+                    <input
+                        placeholder="Password"
+                        type="password"
+                        onChange={onChangePassword} />
+                </label>
+                { isSignup ?
+                    <label>
+                        <input
+                            placeholder="Confirm password"
+                            type="password"
+                            onChange={onChangePasswordConfirmation} />
+                    </label>
+                : null }
+                <div className="form__buttons">
+                    <button
+                        type='submit'
+                        disabled={!username || !password || (isSignup && password !== passwordConfirmation)}>
+                        { isSignup ? 'Sign up' : 'Sign in' }
+                    </button>
+                </div>
+            </form>
         </section>
     );
 }

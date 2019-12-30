@@ -7,8 +7,8 @@ function Authentication() {
     return (
         <div className="authentication flex-center">
             <Tabs titles={ ["Sign in", "Sign up"] }>
-                <AuthenticationForm signup={false} />
-                <AuthenticationForm signup={true} />
+                <AuthenticationForm isSignup={false} />
+                <AuthenticationForm isSignup={true} />
             </Tabs>
         </div>
     );
