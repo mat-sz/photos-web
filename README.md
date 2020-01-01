@@ -1,5 +1,7 @@
 # photos-web
 
+[![Build Status](https://travis-ci.com/mat-sz/photos-web.svg?branch=master)](https://travis-ci.com/mat-sz/photos-web)
+
 React (& TypeScript) front-end for [photos-api](https://github.com/mat-sz/photos-api).
 
 **This app is not ready for production deployment yet.**
