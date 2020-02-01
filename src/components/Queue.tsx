@@ -37,7 +37,10 @@ function Queue({ refresh }: {
             }
 
             const dataURL = await Utils.readFileAsDataURL(item);
-            const thumbnailDataURL = await nailIt(dataURL, 300, true);
+            const thumbnailDataURL = await nailIt(dataURL, {
+                maxSize: 300,
+                cover: true,
+            });
 
             let queueItem: QueueItemType = {
                 id: uuid(),
