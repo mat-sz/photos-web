@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Dropzone from 'react-dropzone';
-import nailIt from 'nailit';
+import { fromImage } from 'imtool';
 import uuid from 'uuid/v4';
 
 import * as Utils from '../Utils';
@@ -37,10 +37,8 @@ function Queue({ refresh }: {
             }
 
             const dataURL = await Utils.readFileAsDataURL(item);
-            const thumbnailDataURL = await nailIt(dataURL, {
-                maxSize: 300,
-                cover: true,
-            });
+            const tool = await fromImage(dataURL);
+            const thumbnailDataURL = await tool.thumbnail(300, true).toDataURL();
 
             let queueItem: QueueItemType = {
                 id: uuid(),

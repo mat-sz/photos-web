@@ -8,7 +8,7 @@
     "@types/react": "^16.9.13",
     "@types/react-dom": "^16.9.4",
     "filesize": "^6.0.1",
-    "nailit": "^2.0.1",
+    "imtool": "^1.1.0",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",

@@ -5094,6 +5094,11 @@ import-local@^2.0.0:
     pkg-dir "^3.0.0"
     resolve-cwd "^2.0.0"
 
+imtool@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/imtool/-/imtool-1.1.0.tgz#e98a3d53f83b10aac80195da54f8cd89b2999d54"
+  integrity sha512-hlqzBq0r/4bxhPayKxvZQgDmLRu6U/indV9W00yymRS7073RO8O17IcS8WV2blG0miWcraa9TraemO3B6JJn3A==
+
 imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
@@ -6722,11 +6727,6 @@ mute-stream@0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.8.tgz#1630c42b2251ff81e2a283de96a5497ea92e5e0d"
   integrity sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
-
-nailit@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/nailit/-/nailit-2.0.1.tgz#74adbfcf7b59d5d64f1891cf97320a34a4d41050"
-  integrity sha512-JfuA4H2vXka4CJAidRRI15K2DkpFmBOqVmUg0SD0TSVbT5ELAby2Pdzm+rBQseno/sVG0Ie+wOUiYOysb8rmog==
 
 nan@^2.12.1, nan@^2.13.2:
   version "2.14.0"
