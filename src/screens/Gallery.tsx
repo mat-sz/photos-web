@@ -7,26 +7,26 @@ import { StateType } from '../reducers';
 import { ActionType } from '../types/ActionType';
 
 function Gallery() {
-    const dispatch = useDispatch();
-    const photos = useSelector((state: StateType) => state.photoState.photos);
+  const dispatch = useDispatch();
+  const photos = useSelector((state: StateType) => state.photoState.photos);
 
-    const updatePhotos = useCallback(async () => {
-        dispatch({ type: ActionType.FETCH_PHOTOS });
-    }, [ dispatch ]);
+  const updatePhotos = useCallback(async () => {
+    dispatch({ type: ActionType.FETCH_PHOTOS });
+  }, [dispatch]);
 
-    useEffect(() => {
-        updatePhotos();
-    }, [ updatePhotos ]);
-    
-    return (
-        <div className="gallery">
-            <section>
-                <h2>Your gallery</h2>
-                <Queue refresh={updatePhotos} />
-                <Photos photos={photos} />
-            </section>
-        </div>
-    );
+  useEffect(() => {
+    updatePhotos();
+  }, [updatePhotos]);
+
+  return (
+    <div className="gallery">
+      <section>
+        <h2>Your gallery</h2>
+        <Queue refresh={updatePhotos} />
+        <Photos photos={photos} />
+      </section>
+    </div>
+  );
 }
 
 export default Gallery;

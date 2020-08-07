@@ -1,263 +1,272 @@
-body, html {
-    font-size: 18px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color: white;
+body,
+html {
+  font-size: 18px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: white;
 }
 
 body {
-    background: #092327;
-    background-image: linear-gradient(135deg, #092327 0%, darken(#092327, 10%) 100%);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    margin: 0;
+  background: #092327;
+  background-image: linear-gradient(
+    135deg,
+    #092327 0%,
+    darken(#092327, 10%) 100%
+  );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 *:disabled {
-    opacity: 0.4;
+  opacity: 0.4;
 }
 
 h2 {
-    margin: 0;
-    margin-bottom: 0.5rem;
-    font-weight: normal;
-    font-size: 1.2rem;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  font-weight: normal;
+  font-size: 1.2rem;
 }
 
 section {
-    position: relative;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 1px 15px 15px -15px rgba(0,0,0,0.3);
-    padding: 1rem;
-    border-radius: 3px;
-    margin-bottom: 2rem;
-    overflow: hidden;
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 1px 15px 15px -15px rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  border-radius: 3px;
+  margin-bottom: 2rem;
+  overflow: hidden;
 }
 
 .flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hidden {
-    opacity: 0;
-    pointer-events: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
-input, button {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    padding: 0.5rem 0.75rem;
-    border-radius: 5px;
-    font-weight: bold;
+input,
+button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 input {
-    color: white;
-    margin-bottom: 0.5rem;
+  color: white;
+  margin-bottom: 0.5rem;
 }
 
 button {
-    color: #333;
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0.5);
-    transition: 0.2s ease-in-out all;
+  color: #333;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.5);
+  transition: 0.2s ease-in-out all;
 
-    &:hover {
-        background: rgba(255, 255, 255, 0.7);
-        box-shadow: 1px 15px 15px -15px rgba(0,0,0,0.3);
-    }
+  &:hover {
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 1px 15px 15px -15px rgba(0, 0, 0, 0.3);
+  }
 }
 
 .form {
-    min-width: 400px;
+  min-width: 400px;
 
-    input, button {
-        display: block;
-        width: 100%;
-    }
+  input,
+  button {
+    display: block;
+    width: 100%;
+  }
 }
 
 .authentication {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .gallery {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2rem;
 }
 
 .upload {
-    &__button {
-        width: 100%;
-        margin-bottom: 0.5rem;
-    }
+  &__button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
 
-    &__queue {
-        .item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            
-            img {
-                width: 7rem;
-                border-radius: 5px;
-                box-shadow: 1px 15px 15px -15px rgba(0,0,0,0.3);
-            }
+  &__queue {
+    .item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
 
-            &__metadata {
-                flex: 1;
-                font-size: 0.9rem;
-                padding: 1rem;
-            }
-        }
+      img {
+        width: 7rem;
+        border-radius: 5px;
+        box-shadow: 1px 15px 15px -15px rgba(0, 0, 0, 0.3);
+      }
+
+      &__metadata {
+        flex: 1;
+        font-size: 0.9rem;
+        padding: 1rem;
+      }
     }
+  }
 }
 
 .tabs {
-    &__list {
-        display: flex;
-        gap: 0.5rem;
-        padding: 0.5rem 0;
+  &__list {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
 
-        & > button {
-            flex: 1;
-            border-radius: 3px;
-            background: rgba(0, 0, 0, 0.3);
-            color: white;
+    & > button {
+      flex: 1;
+      border-radius: 3px;
+      background: rgba(0, 0, 0, 0.3);
+      color: white;
 
-            &.active, &:hover {
-                background: rgba(0, 0, 0, 0.8);
-            }
-        }
+      &.active,
+      &:hover {
+        background: rgba(0, 0, 0, 0.8);
+      }
     }
+  }
 }
 
 .photo-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1rem;
 
-    .photo {
-        img {
-            width: 10rem;
-            border-radius: 5px;
-            box-shadow: 1px 15px 15px -15px rgba(0,0,0,0.3);
-        }
+  .photo {
+    img {
+      width: 10rem;
+      border-radius: 5px;
+      box-shadow: 1px 15px 15px -15px rgba(0, 0, 0, 0.3);
     }
+  }
 }
 
 .dropzone {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 1rem 5rem;
-    cursor: pointer;
-    text-align: center;
-    border-radius: 3px;
-    margin-bottom: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem 5rem;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 3px;
+  margin-bottom: 2rem;
 }
 
 @media screen and (min-width: 1000px) {
-    .photo-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
+  .photo-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .bar {
-    background: rgba(0, 0, 0, 0.3);
-    margin: 0;
-    padding: 0.5rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  background: rgba(0, 0, 0, 0.3);
+  margin: 0;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 
-    &__queue-info {
-        flex: 1;
-    }
+  &__queue-info {
+    flex: 1;
+  }
 
-    &__user-info {
-        button {
-            margin-left: 1rem;
-        }
+  &__user-info {
+    button {
+      margin-left: 1rem;
     }
+  }
 }
 
 /* From: https://loading.io/css/
 Rewritten in SCSS by me. */
 .spinner {
-    color: white;
-    display: inline-block;
-    position: relative;
-    width: 80px;
-    height: 80px;
+  color: white;
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
 
-    div {
-        transform-origin: 40px 40px;
-        animation: spinner 1.2s linear infinite;
+  div {
+    transform-origin: 40px 40px;
+    animation: spinner 1.2s linear infinite;
 
-        &:after {
-            content: " ";
-            display: block;
-            position: absolute;
-            top: 3px;
-            left: 37px;
-            width: 6px;
-            height: 18px;
-            border-radius: 20%;
-            background: #fff;
-        }
-
-        @for $i from 1 through 12 {
-          &:nth-child(#{$i}) {
-            transform: rotate(#{$i * 30 - 30}deg);
-            animation-delay: #{$i * 0.1 - 1.2}s;
-          }
-        }
+    &:after {
+      content: ' ';
+      display: block;
+      position: absolute;
+      top: 3px;
+      left: 37px;
+      width: 6px;
+      height: 18px;
+      border-radius: 20%;
+      background: #fff;
     }
+
+    @for $i from 1 through 12 {
+      &:nth-child(#{$i}) {
+        transform: rotate(#{$i * 30 - 30}deg);
+        animation-delay: #{$i * 0.1 - 1.2}s;
+      }
+    }
+  }
 }
 
 .error {
-    text-align: center;
-    background: rgba(0,0,0,0.75);
-    padding: 1rem;
-    border-radius: 5px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 1rem;
+  border-radius: 5px;
 
-    div {
-        padding: 0.5rem;
-        display: flex;
+  div {
+    padding: 0.5rem;
+    display: flex;
 
-        button {
-            flex: 1;
-        }
+    button {
+      flex: 1;
     }
+  }
 }
 
 @keyframes spinner {
-    0% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 1;
+  }
 
-    100% {
-        opacity: 0;
-    }
+  100% {
+    opacity: 0;
+  }
 }
 
 .spinner-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
-    background: rgba(0,0,0,0.5);
-    z-index: 9999;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
 }

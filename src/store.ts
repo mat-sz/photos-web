@@ -5,15 +5,12 @@ import reducers, { StoreType } from './reducers';
 import sagas from './sagas';
 
 const newStore = (): StoreType => {
-    const sagaMiddleware = createSagaMiddleware();
-    const store = createStore(
-        reducers,
-        applyMiddleware(sagaMiddleware),
-    );
+  const sagaMiddleware = createSagaMiddleware();
+  const store = createStore(reducers, applyMiddleware(sagaMiddleware));
 
-    sagaMiddleware.run(sagas);
+  sagaMiddleware.run(sagas);
 
-    return store;
+  return store;
 };
 
 export default newStore;

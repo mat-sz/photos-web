@@ -5,7 +5,7 @@ import authenticationSaga from './authenticationSaga';
 import photoSaga from './photoSaga';
 
 export default function* root() {
-    yield fork(applicationSaga);
-    yield fork(authenticationSaga);
-    yield fork(photoSaga);
-};
+  yield fork(applicationSaga);
+  yield fork(authenticationSaga);
+  yield fork(photoSaga);
+}

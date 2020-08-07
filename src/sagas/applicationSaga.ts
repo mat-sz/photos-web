@@ -5,21 +5,21 @@ import { ActionModel, ResponseModel } from '../types/Models';
 import { httpGet } from './http';
 
 function* setTitle(action: ActionModel) {
-    yield call(() => document.title = action.value);
+  yield call(() => (document.title = action.value));
 }
 
 function* updateInstanceInfo() {
-    let res: ResponseModel = yield call(() => httpGet('instance'));
+  let res: ResponseModel = yield call(() => httpGet('instance'));
 
-    if (res.data && res.data.title) {
-        yield put({ type: ActionType.SET_TITLE, value: res.data.title });
-    }
+  if (res.data && res.data.title) {
+    yield put({ type: ActionType.SET_TITLE, value: res.data.title });
+  }
 }
 
 export default function* root() {
-    yield call(() => document.title = 'photos-web');
+  yield call(() => (document.title = 'photos-web'));
 
-    yield takeEvery(ActionType.SET_TITLE, setTitle);
+  yield takeEvery(ActionType.SET_TITLE, setTitle);
 
-    yield call(() => updateInstanceInfo());
-};
+  yield call(() => updateInstanceInfo());
+}
